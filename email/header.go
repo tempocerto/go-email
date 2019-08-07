@@ -188,7 +188,7 @@ func (h Header) SetFrom(email string) {
 
 // To ...
 func (h Header) To() []string {
-	return strings.Split(h.Get("To"), ", ")
+	return split(h.Get("To"), ", ")
 }
 
 // SetTo ...
@@ -198,7 +198,7 @@ func (h Header) SetTo(emails ...string) {
 
 // Cc ...
 func (h Header) Cc() []string {
-	return strings.Split(h.Get("Cc"), ", ")
+	return split(h.Get("Cc"), ", ")
 }
 
 // SetCc ...
@@ -208,7 +208,7 @@ func (h Header) SetCc(emails ...string) {
 
 // Bcc ...
 func (h Header) Bcc() []string {
-	return strings.Split(h.Get("Bcc"), ", ")
+	return split(h.Get("Bcc"), ", ")
 }
 
 // SetBcc ...
@@ -224,4 +224,12 @@ func (h Header) Subject() string {
 // SetSubject ...
 func (h Header) SetSubject(subject string) {
 	h.Set("Subject", subject)
+}
+
+func split(s, sep string) []string {
+	s = strings.TrimSpace(s)
+	if s == "" {
+		return []string{}
+	}
+	return strings.Split(s, sep)
 }
